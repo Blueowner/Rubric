@@ -1,7 +1,24 @@
 <?php
 
-Route::get('/', 	ContactController::index());
+$Route = new Route($_SERVER['QUERY_STRING']);
 
-Route::get('/show', ContactController::show());
+$id = $_GET['id'];
 
-Route::get('/edit', ContactController::edit());
+// GET
+
+$Route->get("", "ContactController@index");
+
+$Route->get("section=create", "ContactController@create");
+
+$Route->get("section=show&id={$id}", "ContactController@show");
+
+$Route->get("section=edit&id={$id}", "ContactController@edit");
+
+
+// POST
+
+$Route->get("section=create&query=store", "ContactController@store");
+
+$Route->get("section=edit&id={$id}&query=update", "ContactController@update");
+
+$Route->get("section=edit&id={$id}&query=destroy", "ContactController@destroy");

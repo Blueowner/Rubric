@@ -1,0 +1,9 @@
+RewriteEngine On
+
+RewriteRule ^css/.+$ 		- [L]
+RewriteRule ^js/.+$ 		- [L]
+
+RewriteRule ^([^/.]+)/?$   					?section=$1 [L]
+RewriteRule ^([^/.]+)/([0-9-]+)/?$   		?section=$1&id=$2 [L]
+RewriteRule ^([^/.]+)/(\w+)/?$ 				?section=$1&query=$2 [L]
+RewriteRule ^([^/.]+)/([0-9-]+)/?(\w+)/?$ 	?section=$1&id=$2&query=$3 [L]
