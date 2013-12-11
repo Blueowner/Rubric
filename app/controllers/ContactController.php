@@ -1,6 +1,7 @@
 <?php
 
 
+// Class ContactController extends Contact --
 Class ContactController
 {
 
@@ -16,7 +17,7 @@ Class ContactController
 	{
 		$this->View = new View;
 
-		$this->Contacts = new Contacts;
+		$this->Contact = new Contact;
 	}
 
 
@@ -26,7 +27,7 @@ Class ContactController
 	 */
 	public function index()
 	{
-		return $this->View->make('site/index', ["contacts" => $this->Contacts->all()]);
+		return $this->View->make('site/index', ["contacts" => $this->Contact->all()]);
 	}
 
 
@@ -46,7 +47,7 @@ Class ContactController
 	 */
 	public function store()
 	{
-		$this->Contacts->DB->insert('contacts', ['name' => $_POST['name'], 'number' => $_POST['number']]);
+		$this->Contact->DB->insert('contacts', ['name' => $_POST['name'], 'number' => $_POST['number']]);
 
 		// header('Location: /');
 		// die;
@@ -59,7 +60,7 @@ Class ContactController
 	 */
 	public function show()
 	{
-		return $this->View->make('site/show', ["contacts" => $this->Contacts->all()[$_GET['id']]]);
+		return $this->View->make('site/show', ["contacts" => $this->Contact->all()[$_GET['id']]]);
 	}
 
 
@@ -69,7 +70,7 @@ Class ContactController
 	 */
 	public function edit()
 	{
-		return $this->View->make('site/edit', ["contacts" => $this->Contacts->all()[$_GET['id']]]);
+		return $this->View->make('site/edit', ["contacts" => $this->Contact->all()[$_GET['id']]]);
 	}
 
 
@@ -81,7 +82,7 @@ Class ContactController
 	{
 		if ($_POST['number'] !== "" && !empty($_POST['number']))
 		{
-			$this->Contacts->DB->update('contacts', ['name' => $_POST['name'], 'number' => $_POST['number']], "WHERE id={$_GET[id]}");
+			$this->Contact->DB->update('contacts', ['name' => $_POST['name'], 'number' => $_POST['number']], "WHERE id={$_GET[id]}");
 			
 			return 'done';
 		}
@@ -96,7 +97,7 @@ Class ContactController
 	 */
 	public function destroy()
 	{
-		$this->Contacts->DB->delete('contacts', "WHERE id={$_GET[id]}");
+		$this->Contact->DB->delete('contacts', "WHERE id={$_GET[id]}");
 
 		// header('Location: /');
 		// die;	

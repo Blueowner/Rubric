@@ -41,7 +41,7 @@ Class DB
 		$stmt = $this->db->prepare( $q );
 		$stmt->execute();
 
-		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+		return $stmt->fetchAll(PDO::FETCH_OBJ);
 	}
 
 

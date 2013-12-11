@@ -4,6 +4,8 @@ Class Route
 {
 
 	private $get;
+
+	public $response;
 	
 
 	/**
@@ -13,6 +15,7 @@ Class Route
 	public function __construct($get)
 	{
 		$this->get = $get;
+		$this->response = false;
 	}
 
 
@@ -20,23 +23,18 @@ Class Route
 	 *
 	 *
 	 */
-	public function get($uri, $handler, $data = null)
+	public function get($uri, $handler)
 	{
-		// echo $uri . " === ";
-		// echo $this->get . "<br/>";
-		
 		if ($this->get === $uri)
 		{
+			$this->response = true;
 
 			$class  = explode('@', $handler)[0];
 			$method = explode('@', $handler)[1];
 
 			$Class = new $class;
 
-			echo $data;
-
-			if ($data)  $action = $Class->$method($data);
-			else 		$action = $Class->$method();
+			$action = $Class->$method();
 
 			echo $action;
 		}

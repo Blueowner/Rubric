@@ -1,10 +1,8 @@
 <?php
 
-Class Contacts
+Class Contact
 {
 	public $DB;
-
-	public $contacts;
 
 	/**
 	 *
@@ -24,7 +22,7 @@ Class Contacts
 	{
 		foreach ( $this->DB->fetchAll("SELECT * FROM contacts") as $contact )
 		{
-			$return[$contact['id']] = $contact;
+			$return[$contact->id] = $contact;
 		}
 
 		return $return;
