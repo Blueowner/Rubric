@@ -20,12 +20,22 @@ Class Contact
 	 */
 	public function all()
 	{
-		foreach ( $this->DB->fetchAll("SELECT * FROM contacts") as $contact )
+		foreach ( $this->DB->fetchAll("SELECT * FROM contacts ORDER BY name ASC") as $contact )
 		{
 			$return[$contact->id] = $contact;
 		}
 
 		return $return;
+	}
+
+
+	/**
+	 *
+	 *
+	 */
+	public function validateNumber($number)
+	{
+		return !empty($number = preg_replace('/[^\d\s]/', '', $number)) && $number !== "";
 	}
 
 }

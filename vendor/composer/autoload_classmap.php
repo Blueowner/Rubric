@@ -6,8 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'ComposerAutoloaderInitd04f0f76e33bc9a67cd4bef21e051cf7' => $vendorDir . '/composer/autoload_real.php',
+    'ComposerAutoloaderInitbee9f1d5aa4492e589fb1f374dc90838' => $vendorDir . '/composer/autoload_real.php',
     'Composer\\Autoload\\ClassLoader' => $vendorDir . '/composer/ClassLoader.php',
+    'Config' => $vendorDir . '/blueowner/src/Config.php',
     'Contact' => $baseDir . '/app/models/Contact.php',
     'ContactController' => $baseDir . '/app/controllers/ContactController.php',
     'DB' => $vendorDir . '/blueowner/src/DB.php',

@@ -11,8 +11,10 @@ Class DB
 	 */
 	public function __construct()
 	{
+		$db = (new Config)->database;
+
 		try {
-			$this->db = new PDO('mysql:host=localhost;dbname=rubric', 'root', 'admin');			
+			$this->db = new PDO("mysql:host={$db->host};dbname={$db->name}", $db->username, $db->password);			
 		} catch (Exception $e) {
 			echo "Database connection error: {$e}";
 		}

@@ -1,7 +1,5 @@
 <?php
 
-
-// Class ContactController extends Contact --
 Class ContactController
 {
 
@@ -27,7 +25,12 @@ Class ContactController
 	 */
 	public function index()
 	{
-		return $this->View->make('site/index', ["contacts" => $this->Contact->all()]);
+		foreach ($this->Contact->all() as $contact)
+		{
+			$initials[ucfirst($contact->name[0])][$contact->id] = $contact;
+		}
+
+		return $this->View->make('site/index', ["initials" => $initials]);
 	}
 
 
@@ -47,10 +50,15 @@ Class ContactController
 	 */
 	public function store()
 	{
-		$this->Contact->DB->insert('contacts', ['name' => $_POST['name'], 'number' => $_POST['number']]);
+		if ($this->Contact->validateNumber($number = $_POST['number']))
+		{
+			$this->Contact->DB->insert('contacts', ['name' => $_POST['name'], 'number' => $number]);
+			
+			return header('Location: /sandbox/Rubric/public/');
+		}
 
-		// header('Location: /');
-		// die;
+		return header('Location: /sandbox/Rubric/public/create/');
+
 	}
 
 
@@ -60,7 +68,7 @@ Class ContactController
 	 */
 	public function show()
 	{
-		return $this->View->make('site/show', ["contacts" => $this->Contact->all()[$_GET['id']]]);
+		return $this->View->make('site/show', ["contact" => $this->Contact->all()[$_GET['id']]]);
 	}
 
 
@@ -70,7 +78,7 @@ Class ContactController
 	 */
 	public function edit()
 	{
-		return $this->View->make('site/edit', ["contacts" => $this->Contact->all()[$_GET['id']]]);
+		return $this->View->make('site/edit', ["contact" => $this->Contact->all()[$_GET['id']]]);
 	}
 
 
@@ -80,14 +88,15 @@ Class ContactController
 	 */
 	public function update()
 	{
-		if ($_POST['number'] !== "" && !empty($_POST['number']))
+		if ($this->Contact->validateNumber($number = $_POST['number']))
 		{
-			$this->Contact->DB->update('contacts', ['name' => $_POST['name'], 'number' => $_POST['number']], "WHERE id={$_GET[id]}");
+			$this->Contact->DB->update('contacts', ['name' => $_POST['name'], 'number' => $number], "WHERE id={$_GET[id]}");	
 			
-			return 'done';
+			return header("Location: /sandbox/Rubric/public/show/{$_GET[id]}");
 		}
 
-		header("Location: /sandbox/Rubric/public/show/{$_GET[id]}");
+		return header("Location: /sandbox/Rubric/public/edit/{$_GET[id]}");
+
 	}
 
 
@@ -97,10 +106,12 @@ Class ContactController
 	 */
 	public function destroy()
 	{
-		$this->Contact->DB->delete('contacts', "WHERE id={$_GET[id]}");
+		if ($this->Contact->DB->delete('contacts', "WHERE id={$_GET[id]}"))
+		{
+			return header('Location: /sandbox/Rubric/public/');	
+		}
 
-		// header('Location: /');
-		// die;	
+		return header("Location: /sandbox/Rubric/public/edit/{$_GET[id]}");
 	}
 
 }

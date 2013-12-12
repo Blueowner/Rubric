@@ -1,0 +1,143 @@
+@import 'normalize.less';
+
+
+
+@main: #7bffb9;
+
+
+html, body {
+	color: #444;
+}
+
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+input {
+	padding: 8px;
+	width: 100%;
+	margin: 5px 0;
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+}
+
+
+header {
+	height: 50px;
+	background: #f5f5f5;
+	background-image: linear-gradient(top, #fff, #f6f6f6);
+	box-shadow: 0 0 3px #aaa;
+	line-height: 50px;
+	position: relative;
+
+	> a {
+		position: absolute;
+		padding: 0 15px;
+
+		&.left {
+			left: 0;
+		}
+
+		&.right {
+			right: 0;
+		}
+	}
+}
+
+
+.contact-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	.letter {
+		padding: 10px 20px;
+
+		> span{
+			font-weight: bold;
+			font-size: .7em;
+			border-bottom: 1px solid #eee;
+			padding: 5px 0;
+			display: block;
+		}
+
+		> li {
+			//background: #fafafa;
+			border-bottom: 1px solid #ddd;
+			margin: 5px 0;
+
+			a {
+				height: 100%;
+				width: 100%;
+				display: block;
+				padding: 10px 0;
+			}
+		}
+
+		&:last-child {
+
+			>li:last-child {
+				border-bottom: 0;
+			}
+		}
+	}
+
+	.name {
+		font-weight: bold;
+		font-size: 1em;
+	}
+
+	.number {
+		font-size: .8em;
+	}
+}
+
+.button {
+	width: 100%;
+	padding: 10px;
+	border: 0;
+	color: darken(@main, 50%);
+	font-weight: bold;
+	font-size: .9em;
+	margin: 10px 0;
+
+	&.main {
+		background: @main;
+		background-image: linear-gradient(top, @main, darken(@main, 10%));
+		box-shadow: 0 1px 1px #ccc;
+	}
+}
+
+.form-create {
+	margin-top: 20px;
+	padding: 0 20px;
+}
+
+.contact-show {
+	margin-top: 20px;
+	padding: 0 20px;
+
+	.name {
+		text-align: center;
+		font-size: 1.6em;
+	}
+
+	.number {
+		margin-top: 20px;
+
+		> span {
+			font-weight: bold;
+			font-size: .7em;
+			display: block;
+			border-bottom: 1px solid #ddd;
+			margin-bottom: 5px;
+			padding-bottom: 3px;
+		}
+	}
+}
+
+
+
+@import 'helpers.less';
