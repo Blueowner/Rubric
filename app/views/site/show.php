@@ -1,6 +1,6 @@
 <header>
-	<a href="http://192.168.0.3/sandbox/Rubric/public/" class="left">Back</a>
-	<a href="http://192.168.0.3/sandbox/Rubric/public/edit/<?= $contact->id ?>" class="right">Edit</a>
+	<a href="<?= base() ?>" class="left">Back</a>
+	<a href="<?= base("edit/{$contact->id}") ?>" class="right">Edit</a>
 </header>
 
 <div class="contact-show">

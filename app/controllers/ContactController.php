@@ -7,6 +7,8 @@ Class ContactController
 
 	private $Contacts;
 
+	private $base;
+
 	/**
 	 *
 	 *
@@ -16,6 +18,8 @@ Class ContactController
 		$this->View = new View;
 
 		$this->Contact = new Contact;
+
+		$this->base = (new Config)->app->base;
 	}
 
 
@@ -50,14 +54,14 @@ Class ContactController
 	 */
 	public function store()
 	{
-		if ($this->Contact->validateNumber($number = $_POST['number']))
+		if ($this->Contact->hasValidNumber($number = $_POST['number']))
 		{
-			$this->Contact->DB->insert('contacts', ['name' => $_POST['name'], 'number' => $number]);
+			$this->Contact->DB->insert('contacts', ['name' => $_POST['name'] ? $_POST['name'] : 'Unknow', 'number' => $number]);
 			
-			return header('Location: /sandbox/Rubric/public/');
+			return header("Location: {$this->base}");
 		}
 
-		return header('Location: /sandbox/Rubric/public/create/');
+		return header("Location: {$this->base}create/");
 
 	}
 
@@ -88,14 +92,14 @@ Class ContactController
 	 */
 	public function update()
 	{
-		if ($this->Contact->validateNumber($number = $_POST['number']))
+		if ($this->Contact->hasValidNumber($number = $_POST['number']))
 		{
-			$this->Contact->DB->update('contacts', ['name' => $_POST['name'], 'number' => $number], "WHERE id={$_GET[id]}");	
+			$this->Contact->DB->update('contacts', ['name' => $_POST['name'] ? $_POST['name'] : 'Unknow', 'number' => $number], "WHERE id={$_GET[id]}");	
 			
-			return header("Location: /sandbox/Rubric/public/show/{$_GET[id]}");
+			return header("Location: {$this->base}show/{$_GET[id]}");
 		}
 
-		return header("Location: /sandbox/Rubric/public/edit/{$_GET[id]}");
+		return header("Location: {$this->base}edit/{$_GET[id]}");
 
 	}
 
@@ -108,10 +112,10 @@ Class ContactController
 	{
 		if ($this->Contact->DB->delete('contacts', "WHERE id={$_GET[id]}"))
 		{
-			return header('Location: /sandbox/Rubric/public/');	
+			return header("Location: {$this->base}");
 		}
 
-		return header("Location: /sandbox/Rubric/public/edit/{$_GET[id]}");
+		return header("Location: {$this->base}edit/{$_GET[id]}");
 	}
 
 }

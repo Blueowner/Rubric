@@ -33,7 +33,7 @@ Class Contact
 	 *
 	 *
 	 */
-	public function validateNumber($number)
+	public function hasValidNumber($number)
 	{
 		return !empty($number = preg_replace('/[^\d\s]/', '', $number)) && $number !== "";
 	}

@@ -1,5 +1,5 @@
 <header>
-	<a href="http://192.168.0.3/sandbox/Rubric/public/create" class="right">Add</a>
+	<a href="<?= base('create') ?>" class="right">Add</a>
 </header>
 
 <ul class="contact-list">
@@ -13,7 +13,7 @@
 			?>
 			
 			<li>
-				<a href="http://192.168.0.3/sandbox/Rubric/public/show/<?= $contact->id ?>">
+				<a href="<?= base("show/{$contact->id}") ?>">
 					<div class="name"><?= $contact->name ?></div>
 					<div class="number"><?= $contact->number ?></div>
 				</a>
