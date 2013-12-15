@@ -27,4 +27,4 @@ $Route->get("section=edit&id={$id}&query=destroy", "ContactController@destroy");
 
 // 404
 
-if (!$Route->response) header('Location: /sandbox/Rubric/public');
+if (!$Route->response) header('Location:'.(new Config)->app->base);
