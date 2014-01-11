@@ -35,7 +35,9 @@ Class Contact
 	 */
 	public function hasValidNumber($number)
 	{
-		return !empty($number = preg_replace('/[^\d\s]/', '', $number)) && $number !== "";
+		$number = preg_replace('/[^\d\s]/', '', $number);
+
+		return !empty($number) && $number !== "";
 	}
 
 }
